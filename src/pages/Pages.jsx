@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { ArrowUpRight, MapPin, Clock3, X, ChevronLeft, ChevronRight, CalendarDays, Users, MessageCircle } from 'lucide-react'
+import { ArrowUpRight, MapPin, Clock3, X, ChevronLeft, ChevronRight, CalendarDays, Users, MessageCircle, Navigation, Copy, Check } from 'lucide-react'
 import { menuGroups, whatsappNumber } from '../data'
 import { PageIntro, WhatsAppLink } from '../components/Shell'
 
@@ -216,6 +216,57 @@ export function Gallery() {
   )
 }
 
-export function Location(){return <main className="page-wrap"><PageIntro eyebrow="COME BY & STAY A WHILE" title={<>Temukan<br/><em>Merene.</em></>} copy="Informasi lokasi berikut menunggu konfirmasi alamat dan pin resmi dari tim Merene."/><div className="location-card"><div><MapPin/><p className="eyebrow">ALAMAT</p><h2>Pejaten, Jakarta Selatan</h2><p>Alamat lengkap dan titik Google Maps perlu dikonfirmasi.</p></div><div><Clock3/><p className="eyebrow">JAM OPERASIONAL</p><h2>Segera diperbarui</h2><p>Jam buka resmi belum tersedia.</p></div></div><div className="map-placeholder">PETA LOKASI MERENE<br/><small>Google Maps akan dipasang setelah pin resmi dikonfirmasi.</small></div></main>}
+export function Location(){
+  const [copied, setCopied] = useState(false)
+  const area = 'Pejaten, Jakarta Selatan'
+  const mapUrl = 'https://maps.app.goo.gl/ysxZGMPSSUL6QnEdA'
+
+  async function copyArea() {
+    try {
+      await navigator.clipboard.writeText(area)
+      setCopied(true)
+      window.setTimeout(() => setCopied(false), 2200)
+    } catch {
+      setCopied(false)
+    }
+  }
+
+  return (
+    <main className="page-wrap">
+      <PageIntro eyebrow="COME BY & STAY A WHILE" title={<>Temukan<br/><em>Merene.</em></>} copy="Rencanakan kunjunganmu ke Merene. Buka titik peta untuk melihat lokasi dan petunjuk perjalanan."/>
+      <section className="location-experience" aria-label="Informasi lokasi Merene">
+        <div className="location-map-panel">
+          <div className="location-map-art" aria-hidden="true">
+            <span className="map-road map-road-one"/><span className="map-road map-road-two"/><span className="map-road map-road-three"/>
+            <span className="map-block map-block-one"/><span className="map-block map-block-two"/><span className="map-block map-block-three"/>
+            <span className="map-pin"><MapPin size={23}/></span>
+            <span className="map-label">PEJATEN</span>
+            <span className="map-coordinates">JAKARTA SELATAN</span>
+          </div>
+          <div className="location-map-caption">
+            <div><p className="eyebrow">FIND YOUR WAY</p><h2>Singgah sejenak.</h2><p>Area lokasi: {area}</p></div>
+            <a className="button button-dark location-directions" href={mapUrl} target="_blank" rel="noreferrer"><Navigation size={15}/> Buka Google Maps <ArrowUpRight size={15}/></a>
+          </div>
+        </div>
+        <aside className="location-details">
+          <div className="location-detail-item">
+            <MapPin size={19}/>
+            <p className="eyebrow">AREA LOKASI</p>
+            <h2>{area}</h2>
+            <p>Alamat jalan dan pin perlu dikonfirmasi langsung oleh tim Merene sebelum informasi detail dipublikasikan.</p>
+            <button className="location-copy" type="button" onClick={copyArea}>{copied ? <Check size={15}/> : <Copy size={15}/>} {copied ? 'Area tersalin' : 'Salin area lokasi'}</button>
+          </div>
+          <div className="location-detail-item">
+            <Clock3 size={19}/>
+            <p className="eyebrow">JAM OPERASIONAL</p>
+            <h2>Segera diperbarui</h2>
+            <p>Jam buka resmi belum tersedia. Pastikan informasi terbaru sebelum berkunjung.</p>
+          </div>
+        </aside>
+      </section>
+      <p className="location-note">Catatan: tautan Google Maps menggunakan pin yang dibagikan untuk proyek ini. Alamat lengkap dan kecocokan pin tetap perlu validasi pemilik brand.</p>
+    </main>
+  )
+}
 
 export function Contact(){return <main className="page-wrap"><PageIntro eyebrow="LET'S CONNECT" title={<>Sampai jumpa<br/><em>di Merene.</em></>} copy="Untuk pertanyaan umum, acara, dan layanan lunch box, hubungi tim Merene."/><div className="contact-panel"><div><p className="eyebrow">WHATSAPP</p><h2>Mulai percakapan.</h2><WhatsAppLink>Hubungi melalui WhatsApp</WhatsAppLink></div><div><p className="eyebrow">INSTAGRAM</p><h2>@merene.jkt</h2><a className="text-link" href="https://instagram.com/merene.jkt" target="_blank" rel="noreferrer">Kunjungi Instagram <ArrowUpRight size={16}/></a></div></div></main>}
