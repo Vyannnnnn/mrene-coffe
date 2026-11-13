@@ -2,7 +2,7 @@ import { Routes, Route, useLocation, Link } from 'react-router-dom'
 import { useEffect } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowLeft } from 'lucide-react'
-import { Header, Footer } from './components/Shell'
+import { Header, Footer, CustomCursor } from './components/Shell'
 import Home from './pages/Home'
 import { Menu, About, Event, Gallery, Location, Contact } from './pages/Pages'
 
@@ -30,6 +30,7 @@ function NotFound() {
 export default function App() {
   return (
     <>
+      <CustomCursor />
       <ScrollToTop />
       <Header />
       <AnimatePresence mode="wait">
