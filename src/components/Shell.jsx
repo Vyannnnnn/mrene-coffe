@@ -1,7 +1,66 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { Menu, X, ArrowUpRight, ExternalLink } from 'lucide-react'
 import { navLinks, whatsappNumber } from '../data'
+
+
+export function CustomCursor() {
+  useEffect(() => {
+    const finePointer = window.matchMedia('(pointer: fine)').matches
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (!finePointer || reducedMotion) return
+
+    const root = document.documentElement
+    const cursor = document.querySelector('.custom-cursor')
+    const ring = cursor?.querySelector('.custom-cursor-ring')
+    const dot = cursor?.querySelector('.custom-cursor-dot')
+    if (!cursor || !ring || !dot) return
+
+    root.classList.add('has-custom-cursor')
+    let frame = 0
+    let x = window.innerWidth / 2
+    let y = window.innerHeight / 2
+
+    const move = (event) => {
+      x = event.clientX
+      y = event.clientY
+      if (frame) cancelAnimationFrame(frame)
+      frame = requestAnimationFrame(() => {
+        ring.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`
+        dot.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`
+        cursor.classList.add('is-visible')
+      })
+    }
+    const down = () => cursor.classList.add('is-pressed')
+    const up = () => cursor.classList.remove('is-pressed')
+    const over = (event) => {
+      if (event.target.closest('a, button, input, select, textarea, [role="button"]')) cursor.classList.add('is-hovering')
+    }
+    const out = (event) => {
+      if (event.target.closest('a, button, input, select, textarea, [role="button"]') && !event.relatedTarget?.closest('a, button, input, select, textarea, [role="button"]')) cursor.classList.remove('is-hovering')
+    }
+    const leave = () => cursor.classList.remove('is-visible')
+
+    window.addEventListener('pointermove', move, { passive: true })
+    window.addEventListener('pointerdown', down)
+    window.addEventListener('pointerup', up)
+    document.addEventListener('pointerover', over)
+    document.addEventListener('pointerout', out)
+    document.addEventListener('pointerleave', leave)
+    return () => {
+      root.classList.remove('has-custom-cursor')
+      window.removeEventListener('pointermove', move)
+      window.removeEventListener('pointerdown', down)
+      window.removeEventListener('pointerup', up)
+      document.removeEventListener('pointerover', over)
+      document.removeEventListener('pointerout', out)
+      document.removeEventListener('pointerleave', leave)
+      if (frame) cancelAnimationFrame(frame)
+    }
+  }, [])
+
+  return <div className="custom-cursor" aria-hidden="true"><span className="custom-cursor-ring"/><span className="custom-cursor-dot"/></div>
+}
 
 export function Header() {
   const [open, setOpen] = useState(false)
