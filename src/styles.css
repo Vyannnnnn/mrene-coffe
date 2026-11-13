@@ -141,7 +141,7 @@
 .custom-cursor-dot{width:5px;height:5px;background:#b85b36}
 .custom-cursor.is-hovering .custom-cursor-ring{width:52px;height:52px;background:rgba(184,91,54,.18);border-color:#d5a17f}
 .custom-cursor.is-pressed .custom-cursor-ring{width:27px;height:27px;background:rgba(184,91,54,.35)}
-html.has-custom-cursor,html.has-custom-cursor body,html.has-custom-cursor a,html.has-custom-cursor button,html.has-custom-cursor input,html.has-custom-cursor select,html.has-custom-cursor textarea{cursor:none!important}
+html.has-custom-cursor,html.has-custom-cursor body,html.has-custom-cursor a,html.has-custom-cursor button,html.has-custom-cursor [role="button"]{cursor:none!important}
 @media(max-width:900px){.location-experience{grid-template-columns:1fr}.location-map-art{height:330px}.location-details{display:grid;grid-template-columns:1fr 1fr}.location-detail-item+ .location-detail-item{border-top:0;border-left:1px solid rgba(232,220,199,.16)}}
 @media(max-width:600px){.location-map-art{height:260px}.location-map-caption{align-items:flex-start;flex-direction:column;padding:24px}.location-details{grid-template-columns:1fr}.location-detail-item+ .location-detail-item{border-left:0;border-top:1px solid rgba(232,220,199,.16)}.location-detail-item{padding:25px}.map-label{font-size:8px}.map-coordinates{font-size:7px}}
 @media(pointer:coarse),(prefers-reduced-motion:reduce){.custom-cursor{display:none!important}}
