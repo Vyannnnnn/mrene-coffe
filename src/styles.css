@@ -80,3 +80,24 @@
 @media(prefers-reduced-motion:reduce){
  .menu-card-button,.menu-card-image img,.menu-card-hint,.gallery-photo img,.gallery-photo-hint,.lightbox-arrow{transition:none}
 }
+
+
+/* P2 motion layer: editorial hero entrance and scroll-led storytelling */
+.hero{isolation:isolate}
+.hero>img{will-change:transform}
+.hero-content{will-change:transform}
+.hero-cta{transition:background-color .25s ease,color .25s ease,transform .25s ease}
+.hero-cta:hover{background:#fff;transform:translateY(-3px)}
+.hero-scroll-cue{display:inline-flex;align-items:center;gap:8px}
+.hero-entry-line{position:absolute;bottom:0;left:5.5%;right:5.5%;height:2px;background:#d5a17f;transform-origin:left center}
+.story-section{overflow:hidden}
+.feature-card-image{overflow:hidden}
+.feature-card-image img{transition:transform .7s cubic-bezier(.2,.7,.2,1)}
+.feature-card:hover .feature-card-image img{transform:scale(1.045)}
+.feature-card{will-change:transform,opacity}
+@media(max-width:760px){.hero-entry-line{left:7%;right:7%}}
+@media(prefers-reduced-motion:reduce){
+ html{scroll-behavior:auto}
+ .hero>img,.hero-content,.feature-card,.feature-card-image img{will-change:auto;transition:none!important}
+ .hero-cta{transition:none}
+}
