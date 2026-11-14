@@ -13,7 +13,7 @@ export const menuGroups = [
     {name:'Nasi Campur Bali',desc:'Nasi dengan aneka lauk pilihan',price:'—',image:'https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=1000&q=85'}
   ]},
   { name:'Minuman', items:[
-    {name:'Rose Light',desc:'Signature beverage',price:'49K',image:'https://images.unsplash.com/photo-1513558161293-c7b0e6c5f5e5?auto=format&fit=crop&w=1000&q=85'},
+    {name:'Rose Light',desc:'Signature beverage',price:'49K',image:'https://plus.unsplash.com/premium_photo-1669757454904-fe066b84ebde?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D'},
     {name:'Cafe Latte',desc:'Espresso dan susu',price:'39K',image:'https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1000&q=85'},
     {name:'Americano',desc:'Espresso dan air',price:'35K',image:'https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=1000&q=85'}
   ]}
